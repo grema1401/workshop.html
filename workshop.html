@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Do Pré-natal aos 12 Meses — Puericultura na Prática</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --teal: #62ACA6;
+    --teal-dark: #3d7d78;
+    --teal-deep: #1a4a47;
+    --mint: #A8D5D1;
+    --mint-light: #EAF6F4;
+    --dark: #1a2e2d;
+    --dark2: #0e1e1d;
+    --cream: #faf8f5;
+    --cream2: #f3efe8;
+    --gold: #c9a84c;
+    --gold-light: #f0e0b0;
+    --text: #2a3a39;
+    --text-light: #5a7370;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.03); } }
+  @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+  @keyframes floatDot { 0%,100% { transform:translateY(0) scale(1); opacity:.4; } 50% { transform:translateY(-18px) scale(1.2); opacity:.8; } }
+  .fade-up { animation: fadeUp .8s ease forwards; }
+  .fade-up-2 { animation: fadeUp .8s .15s ease forwards; opacity:0; }
+  .fade-up-3 { animation: fadeUp .8s .3s ease forwards; opacity:0; }
+  .fade-up-4 { animation: fadeUp .8s .45s ease forwards; opacity:0; }
+
+  /* STICKY CTA BAR */
+  .sticky-bar {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(26,46,45,.97); backdrop-filter:blur(10px);
+    padding:.7rem 2rem; display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid rgba(98,172,166,.3);
+    transform:translateY(-100%); transition:transform .4s ease;
+  }
+  .sticky-bar.visible { transform:translateY(0); }
+  .sticky-bar-text { color:var(--mint); font-size:.82rem; font-weight:500; letter-spacing:.05em; }
+  .sticky-bar-text span { color:white; font-weight:600; }
+  .btn-sticky {
+    background: var(--gold); color: var(--dark2); padding:.5rem 1.4rem;
+    border-radius:4px; font-size:.8rem; font-weight:700; text-decoration:none;
+    letter-spacing:.08em; text-transform:uppercase; white-space:nowrap;
+    transition: all .2s;
+  }
+  .btn-sticky:hover { background:#e0bc6a; transform:translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark2);
+    position: relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero-bg {
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(98,172,166,.18) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 10% 80%, rgba(201,168,76,.08) 0%, transparent 60%),
+                linear-gradient(160deg, #0e1e1d 0%, #1a2e2d 50%, #0a1a19 100%);
+  }
+  .hero-dots {
+    position:absolute; inset:0; overflow:hidden; pointer-events:none;
+  }
+  .dot {
+    position:absolute; border-radius:50%; background:var(--teal);
+    animation: floatDot linear infinite;
+  }
+  .hero-content { position:relative; z-index:2; max-width:860px; text-align:center; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:.5rem;
+    background:rgba(98,172,166,.15); border:1px solid rgba(98,172,166,.35);
+    padding:.4rem 1.2rem; border-radius:50px; margin-bottom:2rem;
+    color:var(--mint); font-size:.75rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase;
+  }
+  .hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--teal); animation:pulse 2s infinite; }
+  .hero-title {
+    font-family:'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight:300; line-height:1.1;
+    color:white; margin-bottom:1rem; letter-spacing:-.02em;
+  }
+  .hero-title em { font-style:italic; color:var(--mint); }
+  .hero-title strong { font-weight:700; display:block; }
+  .hero-subtitle {
+    font-size:1.05rem; color:rgba(168,213,209,.8); font-weight:300;
+    margin-bottom:2.5rem; line-height:1.7; max-width:620px; margin-left:auto; margin-right:auto;
+  }
+  .hero-meta {
+    display:flex; align-items:center; justify-content:center; gap:2rem;
+    margin-bottom:2.5rem; flex-wrap:wrap;
+  }
+  .hero-meta-item { display:flex; align-items:center; gap:.5rem; color:rgba(255,255,255,.7); font-size:.85rem; }
+  .hero-meta-item svg { color:var(--teal); flex-shrink:0; }
+  .btn-hero {
+    display:inline-block;
+    background: linear-gradient(135deg, var(--gold), #e0bc6a);
+    color: var(--dark2); padding:1rem 3rem; border-radius:4px;
+    font-size:1rem; font-weight:700; text-decoration:none;
+    letter-spacing:.08em; text-transform:uppercase;
+    box-shadow:0 8px 32px rgba(201,168,76,.35);
+    transition: all .3s; position:relative; overflow:hidden;
+  }
+  .btn-hero::after {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+    background-size:200% 100%; animation:shimmer 2.5s infinite;
+  }
+  .btn-hero:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(201,168,76,.45); }
+  .hero-note { margin-top:1rem; color:rgba(255,255,255,.4); font-size:.78rem; }
+  .hero-scroll {
+    position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+    color:rgba(255,255,255,.3); font-size:.72rem; letter-spacing:.15em;
+    text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:.4rem;
+  }
+  .hero-scroll-line { width:1px; height:40px; background:linear-gradient(to bottom, var(--teal), transparent); }
+
+  /* SECTIONS */
+  section { padding:5rem 2rem; }
+  .container { max-width:1000px; margin:0 auto; }
+  .section-label {
+    font-size:.72rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--teal); margin-bottom:.75rem;
+  }
+  .section-title {
+    font-family:'Cormorant Garamond', serif;
+    font-size:clamp(2rem, 4vw, 3rem); font-weight:400; line-height:1.2;
+    color:var(--dark); margin-bottom:1rem;
+  }
+  .section-title em { font-style:italic; color:var(--teal); }
+
+  /* PAIN SECTION */
+  .pain { background:var(--cream2); }
+  .pain-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:3rem; }
+  .pain-card {
+    background:white; border-radius:8px; padding:1.5rem;
+    border-left:3px solid var(--teal); position:relative;
+    box-shadow:0 2px 16px rgba(0,0,0,.06);
+  }
+  .pain-card-icon { font-size:1.5rem; margin-bottom:.75rem; }
+  .pain-card h3 { font-size:.95rem; font-weight:600; color:var(--dark); margin-bottom:.4rem; }
+  .pain-card p { font-size:.85rem; color:var(--text-light); line-height:1.7; }
+
+  /* FOR WHOM */
+  .forwhom { background:var(--dark); }
+  .forwhom .section-label { color:var(--mint); }
+  .forwhom .section-title { color:white; }
+  .forwhom-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.5rem; margin-top:3rem; }
+  .forwhom-card {
+    background:rgba(255,255,255,.05); border:1px solid rgba(98,172,166,.2);
+    border-radius:10px; padding:1.8rem 1.5rem; text-align:center;
+    transition:all .3s;
+  }
+  .forwhom-card:hover { background:rgba(98,172,166,.1); border-color:rgba(98,172,166,.5); transform:translateY(-4px); }
+  .forwhom-card-icon { font-size:2rem; margin-bottom:1rem; }
+  .forwhom-card h3 { color:white; font-size:1rem; font-weight:600; margin-bottom:.5rem; }
+  .forwhom-card p { color:rgba(168,213,209,.7); font-size:.82rem; line-height:1.6; }
+
+  /* CONTENT */
+  .content-section { background:var(--mint-light); }
+  .days-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:3rem; }
+  .day-card {
+    background:white; border-radius:12px; overflow:hidden;
+    box-shadow:0 4px 24px rgba(0,0,0,.08);
+  }
+  .day-header {
+    background:var(--teal); padding:1.2rem 1.5rem;
+    display:flex; align-items:center; gap:1rem;
+  }
+  .day-number {
+    width:40px; height:40px; border-radius:50%;
+    background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center;
+    color:white; font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; flex-shrink:0;
+  }
+  .day-header-text h3 { color:white; font-size:.95rem; font-weight:700; }
+  .day-header-text p { color:rgba(255,255,255,.8); font-size:.75rem; margin-top:.1rem; }
+  .day-body { padding:1.5rem; }
+  .day-item {
+    display:flex; gap:.75rem; align-items:flex-start;
+    padding:.6rem 0; border-bottom:1px solid #f0f0f0;
+  }
+  .day-item:last-child { border-bottom:none; }
+  .day-item-dot { width:8px; height:8px; border-radius:50%; background:var(--teal); flex-shrink:0; margin-top:.35rem; }
+  .day-item p { font-size:.85rem; color:var(--text); line-height:1.5; }
+
+  /* INSTRUCTOR */
+  .instructor { background:white; }
+  .instructor-inner {
+    display:grid; grid-template-columns:1fr 2fr; gap:4rem; align-items:center;
+  }
+  .instructor-photo {
+    aspect-ratio:3/4; border-radius:12px; overflow:hidden; position:relative;
+    background:var(--mint-light);
+  }
+  .instructor-photo-placeholder {
+    width:100%; height:100%; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:1rem;
+    background:linear-gradient(135deg, var(--mint-light), var(--teal));
+    color:white; font-family:'Cormorant Garamond',serif;
+  }
+  .instructor-photo-placeholder span { font-size:3rem; }
+  .instructor-photo-placeholder p { font-size:1.1rem; font-style:italic; }
+  .instructor-content .section-label { margin-bottom:.5rem; }
+  .instructor-name {
+    font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:400;
+    color:var(--dark); margin-bottom:.25rem;
+  }
+  .instructor-cred { color:var(--teal); font-size:.9rem; font-weight:500; margin-bottom:1.5rem; }
+  .instructor-bio { color:var(--text-light); font-size:.9rem; line-height:1.8; margin-bottom:1.5rem; }
+  .instructor-stats { display:flex; gap:2rem; }
+  .stat { text-align:center; }
+  .stat-num { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:700; color:var(--teal); display:block; }
+  .stat-label { font-size:.72rem; color:var(--text-light); text-transform:uppercase; letter-spacing:.1em; }
+
+  /* PRICING */
+  .pricing { background:var(--dark2); }
+  .pricing .section-label { color:var(--mint); }
+  .pricing .section-title { color:white; }
+  .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+  .price-card {
+    border-radius:12px; padding:2rem 1.5rem; text-align:center;
+    border:1px solid rgba(98,172,166,.2); position:relative;
+    transition:all .3s;
+  }
+  .price-card.featured {
+    background:var(--teal); border-color:var(--teal);
+    transform:scale(1.04);
+    box-shadow:0 8px 40px rgba(98,172,166,.3);
+  }
+  .price-card:not(.featured) { background:rgba(255,255,255,.05); }
+  .price-card:hover:not(.featured) { background:rgba(255,255,255,.08); border-color:rgba(98,172,166,.4); }
+  .price-tag {
+    display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.12em;
+    text-transform:uppercase; padding:.3rem .8rem; border-radius:50px; margin-bottom:1rem;
+  }
+  .price-card.featured .price-tag { background:rgba(255,255,255,.2); color:white; }
+  .price-card:not(.featured) .price-tag { background:rgba(98,172,166,.15); color:var(--mint); }
+  .price-batch { color:rgba(255,255,255,.5); font-size:.8rem; margin-bottom:.25rem; }
+  .price-card.featured .price-batch { color:rgba(255,255,255,.7); }
+  .price-amount { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:700; color:white; line-height:1; }
+  .price-card.featured .price-amount { color:white; }
+  .price-seats { font-size:.78rem; color:rgba(255,255,255,.4); margin-top:.3rem; margin-bottom:1.5rem; }
+  .price-card.featured .price-seats { color:rgba(255,255,255,.7); }
+  .price-includes { text-align:left; margin-bottom:1.5rem; }
+  .price-includes li {
+    font-size:.82rem; color:rgba(255,255,255,.7); padding:.3rem 0;
+    display:flex; gap:.5rem; align-items:flex-start; list-style:none;
+  }
+  .price-card.featured .price-includes li { color:rgba(255,255,255,.9); }
+  .price-includes li::before { content:'✓'; color:var(--mint); font-weight:700; flex-shrink:0; }
+  .price-card.featured .price-includes li::before { color:rgba(255,255,255,.9); }
+  .btn-price {
+    display:block; padding:.8rem; border-radius:6px;
+    font-size:.82rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    text-decoration:none; text-align:center; transition:all .2s;
+  }
+  .price-card.featured .btn-price { background:white; color:var(--teal-dark); }
+  .price-card.featured .btn-price:hover { background:var(--mint-light); }
+  .price-card:not(.featured) .btn-price { background:rgba(98,172,166,.2); color:var(--mint); border:1px solid rgba(98,172,166,.3); }
+  .price-card:not(.featured) .btn-price:hover { background:rgba(98,172,166,.35); }
+
+  /* GUARANTEE */
+  .guarantee {
+    background:var(--mint-light);
+    text-align:center; padding:4rem 2rem;
+  }
+  .guarantee-box {
+    max-width:620px; margin:0 auto;
+    background:white; border-radius:12px; padding:3rem;
+    box-shadow:0 4px 32px rgba(0,0,0,.08);
+    border-top:4px solid var(--teal);
+  }
+  .guarantee-icon { font-size:3rem; margin-bottom:1rem; }
+  .guarantee-title { font-family:'Cormorant Garamond',serif; font-size:1.8rem; color:var(--dark); margin-bottom:1rem; }
+  .guarantee-text { color:var(--text-light); font-size:.9rem; line-height:1.8; }
+
+  /* FAQ */
+  .faq { background:white; }
+  .faq-list { margin-top:3rem; max-width:720px; }
+  .faq-item { border-bottom:1px solid #eee; }
+  .faq-q {
+    width:100%; background:none; border:none; cursor:pointer;
+    padding:1.2rem 0; display:flex; justify-content:space-between; align-items:center;
+    font-family:'Jost',sans-serif; font-size:.95rem; font-weight:600; color:var(--dark);
+    text-align:left; gap:1rem;
+  }
+  .faq-q:hover { color:var(--teal); }
+  .faq-icon { color:var(--teal); font-size:1.2rem; flex-shrink:0; transition:transform .3s; }
+  .faq-item.open .faq-icon { transform:rotate(45deg); }
+  .faq-a { display:none; padding-bottom:1.2rem; color:var(--text-light); font-size:.88rem; line-height:1.8; }
+  .faq-item.open .faq-a { display:block; }
+
+  /* FINAL CTA */
+  .final-cta {
+    background:linear-gradient(135deg, var(--teal-deep), var(--dark));
+    text-align:center; padding:6rem 2rem; position:relative; overflow:hidden;
+  }
+  .final-cta::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse 60% 60% at 50% 50%, rgba(98,172,166,.2), transparent);
+  }
+  .final-cta-content { position:relative; z-index:1; max-width:620px; margin:0 auto; }
+  .final-cta .section-label { color:var(--mint); text-align:center; }
+  .final-cta-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:300; color:white; margin-bottom:1rem; line-height:1.2; }
+  .final-cta-title em { font-style:italic; color:var(--mint); }
+  .final-cta-sub { color:rgba(168,213,209,.7); font-size:.9rem; margin-bottom:2.5rem; line-height:1.7; }
+  .btn-final {
+    display:inline-block; background:linear-gradient(135deg, var(--gold), #e0bc6a);
+    color:var(--dark2); padding:1.1rem 3.5rem; border-radius:4px;
+    font-size:1rem; font-weight:700; text-decoration:none;
+    letter-spacing:.08em; text-transform:uppercase;
+    box-shadow:0 8px 32px rgba(201,168,76,.35); transition:all .3s;
+  }
+  .btn-final:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(201,168,76,.5); }
+  .final-note { margin-top:1rem; color:rgba(255,255,255,.35); font-size:.78rem; }
+
+  /* FOOTER */
+  footer {
+    background:var(--dark2); padding:2rem; text-align:center;
+    color:rgba(255,255,255,.3); font-size:.78rem; border-top:1px solid rgba(98,172,166,.1);
+  }
+  footer a { color:var(--teal); text-decoration:none; }
+
+  /* RESPONSIVE */
+  @media(max-width:768px) {
+    .pain-grid, .days-grid, .pricing-grid { grid-template-columns:1fr; }
+    .instructor-inner { grid-template-columns:1fr; }
+    .instructor-photo { max-width:280px; margin:0 auto; }
+    .price-card.featured { transform:none; }
+    .hero-meta { gap:1rem; }
+    .instructor-stats { gap:1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-bar-text"><span>Workshop Puericultura na Prática</span> — Lote 1: R$397 · Vagas limitadas</div>
+  <a href="#inscricao" class="btn-sticky">Garantir vaga</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots" id="heroDots"></div>
+  <div class="hero-content fade-up">
+    <div class="hero-badge">Workshop Online ao Vivo + Gravação</div>
+    <h1 class="hero-title">
+      <em>Do Pré-natal</em>
+      <strong>aos 12 Meses</strong>
+    </h1>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--mint); margin-bottom:.5rem; font-style:italic; font-weight:300;">Puericultura na Prática</p>
+    <p class="hero-subtitle fade-up-2">
+      Tudo o que você precisa saber para atender o bebê com confiança — da consulta pré-natal ao acompanhamento completo do primeiro ano de vida.
+    </p>
+    <div class="hero-meta fade-up-3">
+      <div class="hero-meta-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Em 2–3 meses · 2 dias de imersão
+      </div>
+      <div class="hero-meta-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        50 vagas · Turma exclusiva
+      </div>
+      <div class="hero-meta-item">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Acesso à gravação incluso
+      </div>
+    </div>
+    <div class="fade-up-4">
+      <a href="#inscricao" class="btn-hero">Quero garantir minha vaga</a>
+      <p class="hero-note">🔒 Lote 1 — apenas 15 vagas a R$397</p>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    rolar
+  </div>
+</section>
+
+<!-- DOR -->
+<section class="pain">
+  <div class="container">
+    <div class="section-label">O problema que ninguém fala</div>
+    <h2 class="section-title">Você se identifica com <em>alguma dessas situações?</em></h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-card-icon">😰</div>
+        <h3>Insegurança na consulta do recém-nascido</h3>
+        <p>Aquela sensação de que faltam protocolos claros para orientar a família nas primeiras semanas — amamentação, perda de peso, icterícia, sono.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card-icon">🤔</div>
+        <h3>Puericultura pré-natal ainda parece distante</h3>
+        <p>Você sabe que ela existe, mas nunca ficou claro como estruturar esse atendimento nem como agregar valor para a gestante antes do nascimento.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card-icon">📚</div>
+        <h3>Teoria demais, prática de menos</h3>
+        <p>Os livros existem, os cursos são longos — mas na hora da consulta ainda falta um fio condutor prático para conduzir cada etapa com segurança.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card-icon">👶</div>
+        <h3>Clínico geral atendendo bebês sem suporte</h3>
+        <p>Pediatra não está sempre disponível, e você acaba atendendo crianças pequenas sem um método estruturado para o acompanhamento do primeiro ano.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM -->
+<section class="forwhom">
+  <div class="container">
+    <div class="section-label">Para quem é este workshop</div>
+    <h2 class="section-title">Feito para <em>médicos que atendem bebês</em></h2>
+    <p style="color:rgba(168,213,209,.7); font-size:.92rem; margin-top:.5rem; max-width:580px;">Independentemente da sua especialidade — se você atende ou quer atender bebês, este workshop foi desenhado para você.</p>
+    <div class="forwhom-grid">
+      <div class="forwhom-card">
+        <div class="forwhom-card-icon">🩺</div>
+        <h3>Pediatras</h3>
+        <p>Que querem estruturar melhor o atendimento e incluir a puericultura pré-natal como diferencial no consultório.</p>
+      </div>
+      <div class="forwhom-card">
+        <div class="forwhom-card-icon">👨‍⚕️</div>
+        <h3>Clínicos Gerais</h3>
+        <p>Que atendem crianças na rotina e querem um método claro para o acompanhamento do primeiro ano com segurança.</p>
+      </div>
+      <div class="forwhom-card">
+        <div class="forwhom-card-icon">🏡</div>
+        <h3>Médicos de Família</h3>
+        <p>Que acompanham famílias inteiras e precisam de suporte prático para o cuidado integral do bebê.</p>
+      </div>
+      <div class="forwhom-card">
+        <div class="forwhom-card-icon">🎓</div>
+        <h3>Residentes e Estudantes</h3>
+        <p>Que querem sair à frente com uma formação prática e aplicável antes de entrar no mercado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEÚDO -->
+<section class="content-section">
+  <div class="container">
+    <div class="section-label">Programação</div>
+    <h2 class="section-title">O que você vai <em>aprender</em></h2>
+    <p style="color:var(--text-light); font-size:.92rem; margin-top:.5rem; max-width:580px;">2 dias de imersão com conteúdo prático e direto ao ponto — sem rodeios, sem teoria que você já sabe.</p>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-header">
+          <div class="day-number">1</div>
+          <div class="day-header-text">
+            <h3>Dia 1 — Puericultura Pré-natal</h3>
+            <p>Da gestação ao nascimento</p>
+          </div>
+        </div>
+        <div class="day-body">
+          <div class="day-item"><div class="day-item-dot"></div><p>O que é puericultura pré-natal e por que ela importa</p></div>
+          <div class="day-item"><div class="day-item-dot"></div><p>Como estruturar a primeira consulta com a gestante</p></div>
+          <div class="day-item"><div class="day-item-dot"></div><p>Orientações essenciais para o pré-parto</p></div>
+          <div class="day-item"><div class="day-item-dot"></div><p>Amamentação: preparação ainda na gestação</p></div>
+          <div class="day-item"><div class="day-item-dot"></div><p>Como criar vínculo com a família antes do nascimento</p></div>
+          <div class="day-item"><div class="day-item-dot"></div><p>Checklist prático da consulta pré-natal pediátrica</p></div>
+        </div>
+      </div>
+      <div class="day-card">
+        <div class="day-header" style="background:var(--teal-dark);">
+          <div class="day-number">2</div>
+          <div class="day-header-text">
+            <h3>Dia 2 — O Primeiro Ano de Vida</h3>
+            <p>Dos primeiros dias aos 12 meses</p>
+          </div>
+        </div>
+        <div class="day-body">
+          <div class="day-item"><div class="day-item-dot"></div><p>Consulta do recém-nascido: o que avaliar e o que orientar</p></div>
+          <div class="day-item"><div class="day-item-dot"></div><p>Marcos do desenvolvimento mês a mês</p></div>
+          <div class="day-item"><div class="day-item-dot"></div><p>Amamentação na prática: problemas frequentes e soluções</p></div>
+          <div class="day-item"><div class="day-item-dot"></div><p>Introdução alimentar: quando, como e o que orientar</p></div>
+          <div class="day-item"><div class="day-item-dot"></div><p>Sono, cólica e choro — condutas baseadas em evidência</p></div>
+          <div class="day-item"><div class="day-item-dot"></div><p>Calendário vacinal e rastreios do 1º ano</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUTORA -->
+<section class="instructor">
+  <div class="container">
+    <div class="instructor-inner">
+      <div class="instructor-photo">
+        <div class="instructor-photo-placeholder">
+          <span>🩺</span>
+          <p>Sua foto aqui</p>
+        </div>
+      </div>
+      <div class="instructor-content">
+        <div class="section-label">Sua instrutora</div>
+        <h2 class="instructor-name">Dra. Greter Fernandez</h2>
+        <p class="instructor-cred">Pediatra · Especialista em Bebês 0–12 meses · Tatuapé, São Paulo</p>
+        <p class="instructor-bio">
+          Médica pediatra com experiência dedicada ao acompanhamento de bebês no primeiro ano de vida, incluindo puericultura pré-natal. Atende de forma particular com foco em humanização, vínculo familiar e medicina baseada em evidências.<br><br>
+          Criou este workshop a partir da prática clínica real — trazendo o método que usa no seu próprio consultório para médicos que querem atender bebês com mais segurança, mais estrutura e mais confiança.
+        </p>
+        <div class="instructor-stats">
+          <div class="stat"><span class="stat-num">+200</span><span class="stat-label">Bebês acompanhados</span></div>
+          <div class="stat"><span class="stat-num">1º</span><span class="stat-label">Ano de vida: foco total</span></div>
+          <div class="stat"><span class="stat-num">2</span><span class="stat-label">Dias de imersão prática</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREÇOS -->
+<section class="pricing" id="inscricao">
+  <div class="container">
+    <div class="section-label" style="text-align:center;">Investimento</div>
+    <h2 class="section-title" style="text-align:center; color:white;">Escolha seu <em>lote</em></h2>
+    <p style="color:rgba(168,213,209,.6); font-size:.88rem; text-align:center; margin-top:.5rem;">Quanto antes você se inscrever, menos paga. O preço aumenta conforme as vagas são preenchidas.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <span class="price-tag">Lote 1 — Early Bird</span>
+        <p class="price-batch">Apenas 15 vagas</p>
+        <div class="price-amount">R$397</div>
+        <p class="price-seats">à vista ou 4x R$104</p>
+        <ul class="price-includes">
+          <li>2 dias de workshop ao vivo</li>
+          <li>Gravação completa</li>
+          <li>Material de apoio em PDF</li>
+          <li>Certificado de participação</li>
+        </ul>
+        <a href="#" class="btn-price">Garantir vaga no lote 1</a>
+      </div>
+      <div class="price-card featured">
+        <span class="price-tag">✦ Lote 2 — Recomendado</span>
+        <p class="price-batch">20 vagas</p>
+        <div class="price-amount">R$497</div>
+        <p class="price-seats">à vista ou 5x R$104</p>
+        <ul class="price-includes">
+          <li>2 dias de workshop ao vivo</li>
+          <li>Gravação completa</li>
+          <li>Material de apoio em PDF</li>
+          <li>Certificado de participação</li>
+          <li>Checklist clínico exclusivo</li>
+        </ul>
+        <a href="#" class="btn-price">Garantir vaga no lote 2</a>
+      </div>
+      <div class="price-card">
+        <span class="price-tag">Lote 3 — Final</span>
+        <p class="price-batch">15 vagas restantes</p>
+        <div class="price-amount">R$597</div>
+        <p class="price-seats">à vista ou 6x R$104</p>
+        <ul class="price-includes">
+          <li>2 dias de workshop ao vivo</li>
+          <li>Gravação completa</li>
+          <li>Material de apoio em PDF</li>
+          <li>Certificado de participação</li>
+          <li>Checklist clínico exclusivo</li>
+        </ul>
+        <a href="#" class="btn-price">Garantir vaga no lote 3</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="guarantee">
+  <div class="guarantee-box">
+    <div class="guarantee-icon">🛡️</div>
+    <h3 class="guarantee-title">Garantia de 7 dias</h3>
+    <p class="guarantee-text">Se por qualquer motivo você não ficar satisfeito com o conteúdo nas primeiras 7 dias após o evento, devolvemos 100% do seu investimento. Sem perguntas, sem burocracia.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="section-label">Dúvidas frequentes</div>
+    <h2 class="section-title">Perguntas <em>respondidas</em></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Preciso ser pediatra para participar? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Não. O workshop foi desenhado para qualquer médico que atende bebês — pediatras, clínicos gerais, médicos de família e residentes. O conteúdo é prático e acessível independentemente da especialidade.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Vou ter acesso à gravação? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Sim. Todos os participantes recebem acesso à gravação completa dos 2 dias. Se você não puder assistir ao vivo, poderá assistir depois no seu tempo.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Por quanto tempo fica disponível a gravação? <span class="faq-icon">+</span></button>
+        <div class="faq-a">A gravação ficará disponível por 12 meses após o evento — tempo suficiente para rever o conteúdo quantas vezes precisar.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Tem certificado? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Sim. Todos os participantes recebem certificado de participação com carga horária do evento.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Posso parcelar? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Sim. Aceitamos parcelamento em até 6x no cartão de crédito, dependendo do lote escolhido.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Como funciona a garantia? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Você tem 7 dias corridos após o evento para solicitar reembolso integral, sem justificativa necessária. Basta entrar em contato pelo e-mail ou WhatsApp informados após a inscrição.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-content">
+    <div class="section-label">Última chamada</div>
+    <h2 class="final-cta-title">Atenda o bebê com <em>confiança e método</em></h2>
+    <p class="final-cta-sub">50 vagas. 2 dias. Do pré-natal aos 12 meses — tudo o que você precisa para estruturar o atendimento do primeiro ano de vida com segurança e clareza.</p>
+    <a href="#inscricao" class="btn-final">Garantir minha vaga agora</a>
+    <p class="final-note">🔒 Pagamento 100% seguro · Garantia de 7 dias</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Dra. Greter Fernandez · Pediatra · <a href="https://greterfernandezpediatra.com">greterfernandezpediatra.com</a></p>
+  <p style="margin-top:.5rem;">Dúvidas? <a href="https://wa.me/5511499600394">Fale pelo WhatsApp</a></p>
+</footer>
+
+<script>
+  // Sticky bar
+  const stickyBar = document.getElementById('stickyBar');
+  const hero = document.getElementById('hero');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > hero.offsetHeight * 0.5) stickyBar.classList.add('visible');
+    else stickyBar.classList.remove('visible');
+  });
+
+  // Hero dots
+  const dotsContainer = document.getElementById('heroDots');
+  for (let i = 0; i < 18; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    const size = Math.random() * 6 + 2;
+    dot.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      opacity:${Math.random()*.5+.1};
+      animation-duration:${Math.random()*6+4}s;
+      animation-delay:${Math.random()*4}s;
+    `;
+    dotsContainer.appendChild(dot);
+  }
+
+  // FAQ
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
