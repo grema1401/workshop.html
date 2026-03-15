@@ -5,7 +5,7 @@ workshop.html
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Do Pré-natal aos 12 Meses — Puericultura na Prática</title>
+<title>Workshop Puericultura na Prática — Dra. Greter Fernandez</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   :root {
@@ -358,13 +358,13 @@ workshop.html
   <div class="hero-dots" id="heroDots"></div>
   <div class="hero-content fade-up">
     <div class="hero-badge">Workshop Online ao Vivo + Gravação</div>
+    <div style="font-family:'Jost',sans-serif; font-size:.75rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--teal); margin-bottom:.5rem;">Workshop</div>
     <h1 class="hero-title">
-      <em>Do Pré-natal</em>
-      <strong>aos 12 Meses</strong>
+      <strong>Puericultura</strong>
+      <em>na Prática</em>
     </h1>
-    <p style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--mint); margin-bottom:.5rem; font-style:italic; font-weight:300;">Puericultura na Prática</p>
     <p class="hero-subtitle fade-up-2">
-      Tudo o que você precisa saber para atender o bebê com confiança — da consulta pré-natal ao acompanhamento completo do primeiro ano de vida.
+      Para <strong style="color:white;">pediatras e médicos que atendem crianças no primeiro ano de vida</strong> — do pré-natal aos 12 meses, com método prático e aplicação imediata no consultório.
     </p>
     <div class="hero-meta fade-up-3">
       <div class="hero-meta-item">
@@ -425,7 +425,7 @@ workshop.html
 <section class="forwhom">
   <div class="container">
     <div class="section-label">Para quem é este workshop</div>
-    <h2 class="section-title">Feito para <em>médicos que atendem bebês</em></h2>
+    <h2 class="section-title">Feito para <em>médicos que atendem crianças</em></h2>
     <p style="color:rgba(168,213,209,.7); font-size:.92rem; margin-top:.5rem; max-width:580px;">Independentemente da sua especialidade — se você atende ou quer atender bebês, este workshop foi desenhado para você.</p>
     <div class="forwhom-grid">
       <div class="forwhom-card">
@@ -624,8 +624,8 @@ workshop.html
 <section class="final-cta">
   <div class="final-cta-content">
     <div class="section-label">Última chamada</div>
-    <h2 class="final-cta-title">Atenda o bebê com <em>confiança e método</em></h2>
-    <p class="final-cta-sub">50 vagas. 2 dias. Do pré-natal aos 12 meses — tudo o que você precisa para estruturar o atendimento do primeiro ano de vida com segurança e clareza.</p>
+    <h2 class="final-cta-title">Atenda com <em>confiança e método</em></h2>
+    <p class="final-cta-sub">50 vagas. 2 dias. Puericultura na Prática — tudo o que você precisa para atender crianças no primeiro ano de vida com segurança e método.</p>
     <a href="#inscricao" class="btn-final">Garantir minha vaga agora</a>
     <p class="final-note">🔒 Pagamento 100% seguro · Garantia de 7 dias</p>
   </div>
@@ -675,3 +675,7 @@ workshop.html
 </script>
 </body>
 </html>
+
+
+     
+  
